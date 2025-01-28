@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="static/styleTwo.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Login</h1>
+  </header>
+  <main>
+    <form action="login" method="POST">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required autocomplete="username" aria-label="Username">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required autocomplete="new-password" aria-label="Password">
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="register.html">Register here</a></p>
+  </main>
+</div>
+</body>
+</html>

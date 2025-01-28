@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <link rel="stylesheet" href="static/styleTwo.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Register</h1>
+  </header>
+  <main>
+    <form action="register" method="POST">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required autocomplete="username" aria-label="Username">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required autocomplete="new-password" aria-label="Password">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required autocomplete="email" aria-label="Email">
+      <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="index.html">Login here</a></p>
+  </main>
+</div>
+</body>
+</html>

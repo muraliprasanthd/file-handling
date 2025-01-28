@@ -1,0 +1,87 @@
+body {
+  background: linear-gradient(135deg, #1f1c2c, #928dab);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  max-width: 600px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+header h1 {
+  color: #fff;
+  margin-bottom: 20px;
+  font-size: 2em;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #ddd;
+}
+
+select, input[type="file"], button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+button {
+  background-color: #6a82fb;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #fc5c7d;
+}
+
+.loading {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  color: #00ff00;
+  font-family: 'Courier New', Courier, monospace;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.matrix {
+  width: 100%;
+  height: 100%;
+  background: url('matrix.gif') center center / cover no-repeat;
+}
+
+.loading-text {
+  font-size: 1.5em;
+  color: #00ff00;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}

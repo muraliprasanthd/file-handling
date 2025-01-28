@@ -1,0 +1,97 @@
+/* src/main/webapp/static/styleTwo.css */
+
+/* Define CSS variables for colors and fonts */
+:root {
+  --background-color: #f4f4f4;
+  --container-background-color: #fff;
+  --box-shadow-color: rgba(0, 0, 0, 0.1);
+  --header-color: #333;
+  --label-color: #555;
+  --input-border-color: #ccc;
+  --button-background-color: #0073e6;
+  --button-hover-background-color: #005bb5;
+  --link-color: #0073e6;
+  --link-hover-decoration: underline;
+  --font-family: Arial, sans-serif;
+}
+
+/* Global styles */
+body {
+  background-color: var(--background-color);
+  font-family: var(--font-family);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Container styles */
+.container {
+  background-color: var(--container-background-color);
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--box-shadow-color);
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+}
+
+/* Header styles */
+header h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: var(--header-color);
+}
+
+/* Form styles */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Label styles */
+label {
+  font-size: 14px;
+  color: var(--label-color);
+  text-align: left;
+}
+
+/* Input styles */
+input {
+  padding: 10px;
+  border: 1px solid var(--input-border-color);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Button styles */
+button {
+  background-color: var(--button-background-color);
+  color: var(--container-background-color);
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: var(--button-hover-background-color);
+}
+
+/* Paragraph styles */
+p {
+  font-size: 14px;
+  color: var(--label-color);
+}
+
+/* Link styles */
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: var(--link-hover-decoration);
+}

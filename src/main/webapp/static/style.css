@@ -1,0 +1,56 @@
+/* Define CSS variables for colors and fonts */
+:root {
+  --background-color: #000;
+  --text-color: #0f0;
+  --font-family: 'Courier New', monospace;
+  --button-hover-color: #0a0;
+}
+
+/* Global styles */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+}
+
+/* Container styles */
+.container {
+  border: 2px solid var(--text-color);
+  padding: 20px;
+}
+
+/* Header styles */
+header h1 {
+  text-align: center;
+}
+
+/* Form styles */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Label, input, and button styles */
+label, input, button {
+  font-family: var(--font-family);
+}
+
+/* File input styles */
+input[type="file"] {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+}
+
+/* Button styles */
+button {
+  background-color: var(--text-color);
+  color: var(--background-color);
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--button-hover-color);
+}

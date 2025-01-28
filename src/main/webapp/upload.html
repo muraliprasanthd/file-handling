@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>File Upload</title>
+  <link rel="stylesheet" href="static/uploadStyle.css">
+</head>
+<body>
+<div class="container" id="mainContainer">
+  <header>
+    <h1>File Upload</h1>
+  </header>
+  <form id="uploadForm" action="upload" method="POST" enctype="multipart/form-data">
+    <label for="fileType">Choose file type:</label>
+    <select id="fileType" name="fileType" onchange="updateFileInput()" required aria-label="File Type">
+      <option value="">--Select File Type--</option>
+      <option value="image">Image Files</option>
+      <option value="audio">Audio Files</option>
+      <option value="video">Video Files</option>
+      <option value="pdf">PDF Documents</option>
+      <option value="word">Word Documents</option>
+      <option value="excel">Excel Spreadsheets</option>
+      <option value="text">Text Files</option>
+      <option value="all">All Files</option>
+    </select>
+
+    <br><br>
+
+    <label for="file">Choose file:</label>
+    <input type="file" id="file" name="file" multiple required aria-label="File">
+
+    <br><br>
+
+    <button type="submit">Upload</button>
+  </form>
+  <div id="response"></div>
+</div>
+<div class="loading" id="loading">
+  <div class="matrix"></div>
+  <p class="loading-text">Scanning for malware, please wait...</p>
+</div>
+
+<script>
+  function updateFileInput() {
+    const fileTypeSelect = document.getElementById('fileType');
+    const fileInput = document.getElementById('file');
+    const selectedType = fileTypeSelect.value;
+
+    // Update the accept attribute based on the selected file type
+    switch (selectedType) {
+      case 'image':
+        fileInput.accept = 'image/*';
+        break;
+      case 'audio':
+        fileInput.accept = 'audio/*';
+        break;
+      case 'video':
+        fileInput.accept = 'video/*';
+        break;
+      case 'pdf':
+        fileInput.accept = '.pdf,application/pdf';
+        break;
+      case 'word':
+        fileInput.accept = '.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+        break;
+      case 'excel':
+        fileInput.accept = '.xls,.xlsx,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+        break;
+      case 'text':
+        fileInput.accept = '.txt,text/plain';
+        break;
+      default:
+        fileInput.accept = '';
+    }
+  }
+
+  document.getElementById('uploadForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    document.getElementById('mainContainer').style.display = 'none';
+    document.getElementById('loading').style.display = 'flex';
+    // Simulate file upload and scanning process
+    setTimeout(() => {
+      window.location.href = 'filelist'; // Redirect to file list after scanning
+    }, 5000); // Adjust the timeout as needed
+  });
+</script>
+</body>
+</html>
