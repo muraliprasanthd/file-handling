@@ -4,6 +4,70 @@
   <meta charset="UTF-8">
   <title>File Upload</title>
   <link rel="stylesheet" href="static/uploadStyle.css">
+  <style>
+    .loading-container {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .loading-bar {
+      width: 100%;
+      background-color: #f3f3f3;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+      position: relative;
+      border-radius: 10px;
+    }
+    .loading-bar div {
+      width: 0;
+      height: 20px;
+      background: linear-gradient(90deg, #4caf50, #00bcd4);
+      border-radius: 10px;
+      transition: width 0.3s ease-in-out;
+    }
+    .loading-text {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      top: 0;
+      left: 0;
+      line-height: 20px;
+      font-weight: bold;
+      color: #fff;
+    }
+    .container {
+      padding: 20px;
+    }
+    .response-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .response-container a {
+      background-color: #ff9800;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .response-container a:hover {
+      background-color: #e65100;
+    }
+    .button {
+      background-color: #00bcd4;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
+    }
+    .button:hover {
+      background-color: #0288d1;
+    }
+  </style>
 </head>
 <body>
 <div class="container" id="mainContainer">
@@ -33,11 +97,14 @@
 
     <button type="submit">Upload</button>
   </form>
+  <div id="loading" class="loading-container">
+    <p>Malware Scanning...</p>
+    <div class="loading-bar">
+      <div></div>
+      <div class="loading-text">0%</div>
+    </div>
+  </div>
   <div id="response"></div>
-</div>
-<div class="loading" id="loading">
-  <div class="matrix"></div>
-  <p class="loading-text">Scanning for malware, please wait...</p>
 </div>
 
 <script>
@@ -76,12 +143,64 @@
 
   document.getElementById('uploadForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    document.getElementById('mainContainer').style.display = 'none';
-    document.getElementById('loading').style.display = 'flex';
-    // Simulate file upload and scanning process
-    setTimeout(() => {
-      window.location.href = 'filelist'; // Redirect to file list after scanning
-    }, 5000); // Adjust the timeout as needed
+    const formData = new FormData(this);
+    const loadingContainer = document.getElementById('loading');
+    const loadingBar = document.querySelector('.loading-bar div');
+    const loadingText = document.querySelector('.loading-text');
+    const responseDiv = document.getElementById('response');
+
+    // Show loading message and bar
+    loadingContainer.style.display = 'block';
+    loadingBar.style.width = '0%';
+    loadingText.textContent = '0%';
+    responseDiv.innerHTML = '';
+
+    // Simulate loading bar progress
+    let progress = 0;
+    const interval = setInterval(() => {
+      if (progress < 100) {
+        progress += 10;
+        loadingBar.style.width = progress + '%';
+        loadingText.textContent = progress + '%';
+      } else {
+        clearInterval(interval);
+      }
+    }, 100);
+
+    fetch('upload', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Hide loading message and bar
+      loadingContainer.style.display = 'none';
+
+      responseDiv.innerHTML = `
+        <div class="response-container">
+          <h2>Upload Response</h2>
+          <p>File Name: ${data.fileName}</p>
+          <p>Status: ${data.status}</p>
+          <a href="filelist" class="button" id="redirectButton">Go to File List</a>
+        </div>
+      `;
+
+      // Add event listener for manual redirection
+      document.getElementById('redirectButton').addEventListener('click', () => {
+        window.location.href = 'filelist';
+      });
+    })
+    .catch(error => {
+      // Hide loading message and bar
+      loadingContainer.style.display = 'none';
+
+      responseDiv.innerHTML = `
+        <div class="response-container">
+          <h2>Error</h2>
+          <p>${error.message}</p>
+        </div>
+      `;
+    });
   });
 </script>
 </body>

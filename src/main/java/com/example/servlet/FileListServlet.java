@@ -49,27 +49,28 @@ public class FileListServlet extends HttpServlet {
         html.append("<html lang='en'>");
         html.append("<head>");
         html.append("<meta charset='UTF-8'>");
-        html.append("<title>Files</title>");
+        html.append("<meta name='viewport' content='width=device-width, initial-scale=1.0'>"); // Mobile responsiveness
+        html.append("<title>Uploaded Files</title>");
+        html.append("<link rel='stylesheet' href='static/styleFiles.css'>");
         html.append("<style>");
-        html.append("body { background: #f4f4f9; color: #333; font-family: Arial, sans-serif; margin: 0; padding: 0; }");
-        html.append(".container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px; }");
-        html.append("header { text-align: center; margin-bottom: 20px; }");
-        html.append("h1 { font-size: 2em; margin: 0; }");
-        html.append("table { width: 100%; border-collapse: collapse; margin-top: 20px; }");
-        html.append("th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }");
-        html.append("th { background-color: #f2f2f2; }");
-        html.append(".malware-status { font-weight: bold; }");
-        html.append(".malware-status.detected { color: red; }");
-        html.append(".malware-status.clean { color: green; }");
+        html.append("body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }");
+        html.append("header { background-color: #333; color: white; padding: 1em; text-align: center; }");
+        html.append("table { width: 100%; border-collapse: collapse; margin: 20px 0; }");
+        html.append("table, th, td { border: 1px solid #ddd; }");
+        html.append("th, td { padding: 12px; text-align: left; }");
+        html.append("th { background-color: #4CAF50; color: white; }");
+        html.append("tr:nth-child(even) { background-color: #f2f2f2; }");
+        html.append("tr:hover { background-color: #ddd; }");
+        html.append(".detected { color: red; font-weight: bold; }");
+        html.append(".clean { color: green; font-weight: bold; }");
         html.append("</style>");
         html.append("</head>");
         html.append("<body>");
+        html.append("<header><h1>Uploaded Files</h1></header>");
         html.append("<div class='container'>");
-        html.append("<header>");
-        html.append("<h1>Uploaded Files</h1>");
-        html.append("</header>");
         html.append("<table>");
-        html.append("<tr><th>File Name</th><th>File Type</th><th>Malware Status</th></tr>");
+        html.append("<thead><tr><th>File Name</th><th>File Type</th><th>Malware Status</th></tr></thead>");
+        html.append("<tbody>");
 
         for (Map<String, Object> file : fileList) {
             String fileName = (String) file.get("fileName");
@@ -79,10 +80,11 @@ public class FileListServlet extends HttpServlet {
             html.append("<tr>");
             html.append("<td>").append(fileName).append("</td>");
             html.append("<td>").append(fileType).append("</td>");
-            html.append("<td class='malware-status ").append(statusClass).append("'>").append(malwareStatus).append("</td>");
+            html.append("<td class='").append(statusClass).append("'>").append(malwareStatus).append("</td>");
             html.append("</tr>");
         }
 
+        html.append("</tbody>");
         html.append("</table>");
         html.append("</div>");
         html.append("</body>");

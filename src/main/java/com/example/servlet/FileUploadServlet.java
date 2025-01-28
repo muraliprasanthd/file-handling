@@ -44,7 +44,6 @@ public class FileUploadServlet extends HttpServlet {
             for (Part part : request.getParts()) {
                 String originalFileName = extractFileName(part);
                 if (originalFileName == null || !SAFE_FILE_NAME.matcher(originalFileName).matches()) {
-                    errors.add("Invalid file name: " + originalFileName);
                     continue;
                 }
 
@@ -97,6 +96,9 @@ public class FileUploadServlet extends HttpServlet {
         } finally {
             out.close();
         }
+
+        // Redirect to filelist
+        response.sendRedirect(request.getContextPath() + "/filelist");
     }
 
     private boolean performMalwareScan(Path filePath) {
